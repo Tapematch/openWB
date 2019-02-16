@@ -512,11 +512,7 @@ foreach($lines as $line) {
 	    if(strpos($line, "wrkostalpikoip=") !== false) {
     	    $result .= 'wrkostalpikoip='.$_POST[wrkostalpikoip]."\n";
     	 $writeit = '1';
-   } 
-	    if(strpos($line, "solaredgeip=") !== false) {
-	    $result .= 'solaredgeip=\''.$_POST[solaredgeip]."'\n";
-	 $writeit = '1';
-	    }
+   }
 	    if(strpos($line, "solaredgepvip=") !== false) {
 	    $result .= 'solaredgepvip=\''.$_POST[solaredgepvip]."'\n";
 	 $writeit = '1';
