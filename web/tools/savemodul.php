@@ -404,7 +404,7 @@ foreach($lines as $line) {
 	$writeit = '1';
     } 
 	    if(strpos($line, "zoepasswort=") !== false) {
-	    $result .= 'zoepasswort='.$_POST[zoepasswort]."\n";
+	    $result .= 'zoepasswort=\''.$_POST[zoepasswort]."'\n";
 	$writeit = '1';
     } 
 	    if(strpos($line, "evnotifytoken=") !== false) {
