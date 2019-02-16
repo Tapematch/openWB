@@ -8,6 +8,7 @@ import ConfigParser
 import struct
 import binascii
 from pymodbus.client.sync import ModbusTcpClient
+from pymodbus.exceptions import ConnectionException
 
 ipaddress = str(sys.argv[1])
 client = ModbusTcpClient(ipaddress, port=502, timeout=5)
@@ -20,9 +21,12 @@ def shift_decimal(value, scale_factor):
 def get_int16(address, slave_id=1):
     r = 0
     for i in range(5):
-        r = client.read_holding_registers(address, 1, unit=slave_id)
-        if hasattr(r, 'registers'):
-            break
+        try:
+            r = client.read_holding_registers(address, 1, unit=slave_id)
+            if hasattr(r, 'registers'):
+                break
+        except ConnectionException:
+            pass
     f = format(r.registers[0], '04x')
     return int(struct.unpack('>h', f.decode('hex'))[0])
 
@@ -30,9 +34,12 @@ def get_int16(address, slave_id=1):
 def get_int32(address, slave_id=1):
     r = 0
     for i in range(5):
-        r = client.read_holding_registers(address, 2, unit=slave_id)
-        if hasattr(r, 'registers'):
-            break
+        try:
+            r = client.read_holding_registers(address, 2, unit=slave_id)
+            if hasattr(r, 'registers'):
+                break
+        except ConnectionException:
+            pass
     f = format(r.registers[0], '04x') + format(r.registers[1], '04x')
     return int(struct.unpack('>i', f.decode('hex'))[0])
 
@@ -40,10 +47,13 @@ def get_int32(address, slave_id=1):
 def get_float(address, slave_id=1):
     r = 0
     for i in range(5):
-        r = client.read_holding_registers(address, 2, unit=slave_id)
-        if hasattr(r, 'registers'):
-            break
-    f =  struct.pack('>HH', r.getRegister(1), r.getRegister(0))
+        try:
+            r = client.read_holding_registers(address, 2, unit=slave_id)
+            if hasattr(r, 'registers'):
+                break
+        except ConnectionException:
+            pass
+    f = struct.pack('>HH', r.getRegister(1), r.getRegister(0))
     return int(struct.unpack('>f', f)[0])
 
 
