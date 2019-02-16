@@ -2734,13 +2734,8 @@ Keine Konfiguration erforderlich.<br><br>
 </div>
 <div id="wattbezugsolaredge">
 	<div class="row" style="background-color:#febebe">
-		<b><label for="solaredgeip">IP Adresse des SolarEdge</label></b>
-		<input type="text" name="solaredgeip" id="solaredgeip" value="<?php echo htmlspecialchars($solaredgeipold) ?>"><br>
-	</div>
-	<div class="row" style="background-color:#febebe">
-		Gültige Werte IP.<br>
+		Die IP des Wechselrichters wird im dazugehörigen Solaredge PV Modul eingestellt.<br>
 		Hierfür muss ein EVU Zähler am SolarEdge Wechselrichter per Modbus angebunden sein.<br>
-		Ebenso muss ModbusTCP am Wechselrichter aktiviert werden<br> 
 	</div>
 </div>
 <div id="wattbezuge3dc">
